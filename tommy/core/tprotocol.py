@@ -7,7 +7,33 @@ import uuid
 from datetime import datetime
 
 
-class TRequest:
+class TPackage:
+	"""
+	Superclass for TRequest and TResponse
+	"""
+
+	def __init__(self, plain_text):
+		"""
+		Initialize a TPackage with an id, a datetime and a plain text
+		"""
+		self.id = str(uuid.uuid4())
+		self.datetime_created = str(datetime.now()).split('.')[0]
+		self.plain_text = plain_text
+
+		if not self.plain_text:
+			raise EmptyTPackage(self)
+
+		self.plain_text = self.plain_text.strip()
+
+	def __str__(self):
+		"""
+		TPackage to string
+		"""
+		return "[<{} #{}> at {} : ({})]".format(self.__class__.__name__, self.id, self.datetime_created,
+											  self.plain_text)
+
+
+class TRequest(TPackage):
 	"""
 	Represents a query sent to Tommy.
 	It's a text wrapper with more informations.
@@ -24,36 +50,20 @@ class TRequest:
 		:param user_agent: User agent used for send the request
 		:type user_agent: str
 		"""
-		self.id = str(uuid.uuid4())  # TRequest identifier
-		self.datetime_sended = str(datetime.now()).split('.')[0]
+		super(TRequest, self).__init__(plain_text)
 		self.user_agent = user_agent
-
-		self.plain_text = plain_text
-
-		if not self.plain_text:
-			raise EmptyTRequest(self)
-
-		self.plain_text.strip()
 		self.splited_text = self.plain_text.split(' ')
 		self.nb_words = len(self.splited_text)
 
-	def __str__(self):
-		"""
-		TRequest to string
-		"""
-		str = "<TRequest #{}> at {} from {} : [{}]".format(self.id, self.datetime_sended, self.user_agent,
-														   self.plain_text)
-		return str
 
-
-class TResponse:
+class TResponse(TPackage):
 	"""
 	Represent a response sent by Tommy
 	It's a text wrapper with more informations.
 	Tommy only sends TResponse
 	"""
 
-	def __init__(self, response_text, trequest):
+	def __init__(self, plain_text, trequest):
 		"""
 		TResponse constructor
 		Initializes the various information
@@ -62,21 +72,11 @@ class TResponse:
 		:param trequest: The TRequest causing the TResponse
 		:type: str
 		"""
-		self.id = str(uuid.uuid4())  # TRequest identifier
-		self.response_text = response_text
-		self.datetime_sended = str(datetime.now()).split('.')[0]
+		super(TResponse, self).__init__(plain_text)
 		self.trequest = trequest
 
 		if not self.trequest:
 			raise TResponseWithoutRequest(self)
-
-	def __str__(self):
-		"""
-		TResponse to string
-		"""
-		str = "<TResponse #{}> at {} : [{}]".format(self.id, self.datetime_sended, self.user_agent,
-													self.response_text)
-		return str
 
 
 # Exceptions
@@ -86,14 +86,17 @@ class TProtocolError(Exception):
 	Generic TProtocol error
 	"""
 
-	def __init__(self, error_msg):
+	def __init__(self, error_msg, tpackage):
 		"""
 		Initializes a TProtocol error with a message
 
 		:param error_msg: The error message
+		:param tpackage: The tpackage concerned
 		:type error_msg: str
+		:type tpackage: TPackage
 		"""
 		self.error_msg = error_msg
+		self.tpackage = tpackage
 		self.datetime_raised = str(datetime.now()).split('.')[0]
 
 
@@ -111,8 +114,7 @@ class TRequestError(TProtocolError):
 		:type error_msg: str
 		:type trequest: TRequest
 		"""
-		super(TRequestError, self).__init__(error_msg)
-		self.trequest = trequest
+		super(TRequestError, self).__init__(error_msg, trequest)
 
 
 class TResponseError(TProtocolError):
@@ -129,30 +131,29 @@ class TResponseError(TProtocolError):
 		:type error_msg: str
 		:type tresponse: TResponse
 		"""
-		super(TResponseError, self).__init__(error_msg)
-		self.tresponse = tresponse
+		super(TResponseError, self).__init__(error_msg, tresponse)
 
 
-class EmptyTRequest(TRequestError):
+class EmptyTPackage(TProtocolError):
 	"""
-	Error for empty TRequest (no text in the request)
+	Error for empty TPackage (no palin_text in the package)
 	"""
 
-	def __init__(self, trequest):
+	def __init__(self, tpackage):
 		"""
-		Initializes an EmptyTRequest error with the TRequest concerned
+		Initializes an EmptyTPackage error with the TPackage concerned
 
-		:param trequest: The TRequest concerned
-		:type trequest: TRequest
+		:param tpackage: The TPackage concerned
+		:type tpackage: TPackage
 		"""
-		error_msg = "This TRequest is empty"
-		super(EmptyTRequest, self).__init__(error_msg, trequest)
+		error_msg = "This TPackage is empty"
+		super(EmptyTPackage, self).__init__(error_msg, tpackage)
 
 	def __str__(self):
 		"""
-		EmptyTRequest to string
+		EmptyTPackage to string
 		"""
-		return "{} : {}".format(self.error_msg, self.trequest)
+		return "{} : {}".format(self.error_msg, self.tpackage)
 
 
 class TResponseWithoutRequest(TResponseError):
@@ -174,4 +175,4 @@ class TResponseWithoutRequest(TResponseError):
 		"""
 		TResponseWithoutRequest to string
 		"""
-		return "{} : {}".format(self.error_msg, self.tresponse)
+		return "{} : {}".format(self.error_msg, self.tpackage)
