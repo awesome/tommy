@@ -25,7 +25,7 @@ class TRequest:
 		:type user_agent: str
 		"""
 		self.id = str(uuid.uuid4())  # TRequest identifier
-		self.datetime_sending = str(datetime.now()).split('.')[0]
+		self.datetime_sended = str(datetime.now()).split('.')[0]
 		self.user_agent = user_agent
 
 		self.plain_text = plain_text
@@ -41,7 +41,7 @@ class TRequest:
 		"""
 		TRequest to string
 		"""
-		str = "<TRequest #{}> at {} from {} : [{}]".format(self.id, self.datetime_sending, self.user_agent,
+		str = "<TRequest #{}> at {} from {} : [{}]".format(self.id, self.datetime_sended, self.user_agent,
 														   self.plain_text)
 		return str
 
@@ -64,7 +64,7 @@ class TResponse:
 		"""
 		self.id = str(uuid.uuid4())  # TRequest identifier
 		self.response_text = response_text
-		self.datetime_sending = str(datetime.now()).split('.')[0]
+		self.datetime_sended = str(datetime.now()).split('.')[0]
 		self.trequest = trequest
 
 		if not self.trequest:
@@ -74,7 +74,7 @@ class TResponse:
 		"""
 		TResponse to string
 		"""
-		str = "<TResponse #{}> at {} : [{}]".format(self.id, self.datetime_sending, self.user_agent,
+		str = "<TResponse #{}> at {} : [{}]".format(self.id, self.datetime_sended, self.user_agent,
 													self.response_text)
 		return str
 
@@ -94,6 +94,7 @@ class TProtocolError(Exception):
 		:type error_msg: str
 		"""
 		self.error_msg = error_msg
+		self.datetime_raised = str(datetime.now()).split('.')[0]
 
 
 class TRequestError(TProtocolError):
