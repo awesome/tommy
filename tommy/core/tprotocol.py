@@ -33,6 +33,7 @@ class TRequest:
 		if not self.plain_text:
 			raise EmptyTRequest(self)
 
+		self.plain_text.strip()
 		self.splited_text = self.plain_text.split(' ')
 		self.nb_words = len(self.splited_text)
 
