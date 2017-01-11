@@ -2,12 +2,14 @@
 Unit tests for TProtocol
 """
 import unittest
-from tommy.core.tprotocol import TRequest
+from tommy.core.tprotocol import TRequest, TResponse, EmptyTRequest
+
 
 class TestTRequest(unittest.TestCase):
 	"""
 	Tests for TRequest
 	"""
+
 	def setUp(self):
 		"""
 		Initializes a TRequest for the tests
@@ -40,3 +42,47 @@ class TestTRequest(unittest.TestCase):
 		Test the number of words
 		"""
 		self.assertEqual(self.trequest.nb_words, 4)
+
+	def test_empty_plain_text(self):
+		"""
+		Test if EmptyTRequest is raised if plain_text is None
+		"""
+		self.assertRaises(EmptyTRequest, TRequest, None, 'test')
+
+	def test_blank_plain_text(self):
+		"""
+		Test if EmptyTRequest is raised if plain_text is blank
+		"""
+		self.assertRaises(EmptyTRequest, TRequest, '', 'test')
+
+
+
+class TestTResponse(unittest.TestCase):
+	"""
+	Tests for TResponse
+	"""
+
+	def setUp(self):
+		"""
+		Initializes a TResponse for the tests
+		"""
+		self.trequest = TRequest('Random request')
+		self.tresponse = TResponse("I am a text", self.trequest)
+
+	def test_response_text(self):
+		"""
+		Test if the response text of the TResponse has not been altered
+		"""
+		self.assertEqual(self.tresponse.response_text, "I am a text")
+
+	def test_tresponse_trequest_instance(self):
+		"""
+		Test if the TRequest of the TResponse has'nt been altered
+		"""
+		self.assertEqual(self.tresponse.trequest, self.trequest)
+
+	def test_tresponse_trequest_text(self):
+		"""
+		Test if the TRequest plain text of the TResponse has'nt been altered
+		"""
+		self.assertEqual(self.tresponse.trequest.plain_text, self.trequest.plain_text)
