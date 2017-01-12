@@ -1,0 +1,15 @@
+{
+  "current_date": {
+    "calls": [
+      {
+        "keywords": ["what", "is", "date"]
+      },
+      {
+        "keywords": ["current", "date"]
+      },
+      {
+        "keywords": ["what", "day", "is", "it"]
+      }
+    ]
+  }
+}
