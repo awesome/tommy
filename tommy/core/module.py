@@ -23,7 +23,7 @@ class Module:
 		# load translations
 		with open(TOOMY_ROOT + '/modules/{}/translations/translations_{}.json'.format(module_name,
 																					  LANG)) as translations:
-			self.translations = translations
+			self.translations = json.load(translations)
 
 		self.module_name = module_name
 
