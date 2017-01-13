@@ -2,9 +2,9 @@
 Tommy Date
 Standard module for date and time
 """
-import datetime, calendar
+import calendar
+from datetime import datetime
 from tommy.core.module import Module
-from tommy.core.tprotocol import TResponse
 
 class Core(Module):
 	"""
@@ -13,7 +13,7 @@ class Core(Module):
 	def __init__(self):
 		super(Core, self).__init__('tommy_date')
 
-	def current_date(self, trequest):
+	def current_date(self):
 		"""
 		Return the current date
 		"""
@@ -23,5 +23,5 @@ class Core(Module):
 
 		cur_date = day + ' ' + month + ' ' + year
 
-		return TResponse(self.random_translation("current_date").format(cur_date), trequest)
+		return self.random_translation("current_date").format(cur_date)
 
