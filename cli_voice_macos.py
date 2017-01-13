@@ -17,7 +17,8 @@ tommy = Tommy()
 
 r = sr.Recognizer()
 
-print("Press and speak")
+print('Tommy virtual assistant - v0.1-BETA 2017-01-12 - Alexandre Pécorilla Markiewicz')
+print("Press enter and speak")
 while True:
 	try:
 		input('>>>')
