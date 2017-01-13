@@ -40,18 +40,5 @@
         ]
       }
     ]
-  },
-  "best_soccer_player": {
-    "calls": [
-      {
-        "keywords": [
-          "who",
-          "is",
-          "best",
-          "player",
-          "world"
-        ]
-      }
-    ]
   }
 }

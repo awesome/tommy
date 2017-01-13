@@ -23,5 +23,3 @@ class Core(Module):
 	def who_are_you(self):
 		return self.random_translation("who_are_you")
 
-	def best_soccer_player(self):
-		return self.random_translation("best_soccer_player")
