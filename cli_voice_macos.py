@@ -1,25 +1,30 @@
-# SPEAK WITH TOMMY FROM COMMAND LINE
-# WORKS ONLY ON MAC OS
+import speech_recognition as sr
+import os
 from tommy.core.tommy import Tommy
 from tommy.core.tprotocol import TRequest, EmptyTPackage
-import os
 
-USER_AGENT = 'cli_text_macos'
-tommy = Tommy()
+USER_AGENT = 'cli_voice_macos'
+
 
 def speak(text):
 	"""
-	Speak method, say text using mac os 'say' command
-	:param text: the text to say
+	Speak tommy response using mac os say command
 	"""
 	os.system("say \"{}\"".format(text))
 
 
-print('Tommy virtual assistant - v0.1-BETA 2017-01-12 - Alexandre Pécorilla Markiewicz')
+tommy = Tommy()
 
+r = sr.Recognizer()
+
+print("Press and speak")
 while True:
 	try:
-		text = input('>>>')
+		input('>>>')
+		with sr.Microphone() as source:
+			audio = r.listen(source)
+			text = r.recognize_google(audio)
+
 		trequest = TRequest(text.lower(), USER_AGENT)
 		tresponse = tommy.process(trequest)
 		speak(tresponse.plain_text)

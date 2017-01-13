@@ -1,0 +1,4 @@
+pip:
+	- importlib
+	- SpeechRecognition
+	- pyaudio
