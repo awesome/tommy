@@ -1,0 +1,36 @@
+{
+  "open_google": {
+    "calls": [
+      {
+        "keywords": [
+          "open",
+          "google"
+        ]
+      },
+      {
+        "keywords": [
+          "go",
+          "to",
+          "google"
+        ]
+      }
+    ]
+  },
+  "open_facebook": {
+    "calls": [
+      {
+        "keywords": [
+          "open",
+          "facebook"
+        ]
+      },
+      {
+        "keywords": [
+          "go",
+          "to",
+          "facebook"
+        ]
+      }
+    ]
+  }
+}
