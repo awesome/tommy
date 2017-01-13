@@ -25,3 +25,10 @@ class Core(Module):
 
 		return self.random_translation("current_date").format(cur_date)
 
+	def current_time(self):
+		"""
+		Return the current time
+		"""
+		curr_time = datetime.now().strftime("%H:%M")
+		return self.random_translation("current_time").format(curr_time)
+

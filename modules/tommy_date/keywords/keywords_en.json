@@ -11,5 +11,19 @@
         "keywords": ["what", "day", "is", "it"]
       }
     ]
+  },
+
+  "current_time": {
+    "calls": [
+      {
+        "keywords": ["what", "time", "is", "it"]
+      },
+      {
+        "keywords": ["give", "time"]
+      },
+      {
+        "keywords": ["what", "is", "time"]
+      }
+    ]
   }
 }
