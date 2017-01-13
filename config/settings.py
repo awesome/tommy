@@ -12,7 +12,8 @@ LANG = 'en'
 
 LOAD_MODULES = [
 	'tommy_date',
-	'tommy_macos_url'
+	'tommy_macos_url',
+	'tommy_hello'
 ]
 
 MODULES_FOLDER = 'modules'

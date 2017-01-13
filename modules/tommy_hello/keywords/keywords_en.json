@@ -1,0 +1,57 @@
+{
+  "hello": {
+    "calls": [
+      {
+        "keywords": [
+          "hello"
+        ]
+      },
+      {
+        "keywords": [
+          "hi"
+        ]
+      },
+      {
+        "keywords": [
+          "good",
+          "morning"
+        ]
+      }
+    ]
+  },
+  "how_are_you": {
+    "calls": [
+      {
+        "keywords": [
+          "how",
+          "are",
+          "you"
+        ]
+      }
+    ]
+  },
+  "who_are_you": {
+    "calls": [
+      {
+        "keywords": [
+          "who",
+          "are",
+          "you"
+        ]
+      }
+    ]
+  },
+  "best_soccer_player": {
+    "calls": [
+      {
+        "keywords": [
+          "who",
+          "is",
+          "best",
+          "player",
+          "world"
+        ]
+      }
+    ]
+  }
+}
