@@ -29,6 +29,9 @@ class TommyInterface(Frame):
 		try:
 			trequest = TRequest(self.plain_text.get().lower().strip())
 			tresponse = self.tommy.process(trequest)
+			with open('tmp.log', 'a') as logs:
+				logs.write("TRequest sended : {}\n".format(trequest.__str__()))
+				logs.write("TResponse receveid for {} : {}\n".format(trequest.id, tresponse.__str__()))
 			speak_macos(tresponse.plain_text)
 		except EmptyTPackage:
 			pass
@@ -42,6 +45,9 @@ class TommyInterface(Frame):
 
 			trequest = TRequest(text.lower().strip())
 			tresponse = self.tommy.process(trequest)
+			with open('tmp.log', 'a') as logs:
+				logs.write("TRequest sended : {}".format(trequest.__str__()))
+				logs.write("TResponse receveid for {} : {}".format(trequest.id, tresponse.__str__()))
 			speak_macos(tresponse.plain_text)
 		except EmptyTPackage:
 			pass
