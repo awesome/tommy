@@ -11,7 +11,6 @@ LANG = 'en'
 # Modules settings
 
 LOAD_MODULES = [
-	'tommy_date',
 	'tommy_hello'
 ]
 
