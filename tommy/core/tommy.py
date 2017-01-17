@@ -4,6 +4,8 @@ Tommy virtual assistant core module
 import importlib
 from config.settings import LOAD_MODULES, MODULES_FOLDER
 from tommy.core.tprotocol import TResponse
+import pdb
+
 
 class Tommy:
 	"""
@@ -35,7 +37,6 @@ class Tommy:
 		for module in LOAD_MODULES:
 			possible_methods[module] = {}
 
-		word_id = 0
 		# iterate on each words
 		for word in splited_text:
 			# iterate on modules
@@ -47,21 +48,24 @@ class Tommy:
 					# iterate on each calls
 					for call in method_definition['calls']:
 						keywords = call['keywords']
-						if word_id < len(keywords) and word == keywords[word_id]:
-							method_name_with_id = method_name + '-{}'.format(id)
-
-							if method_name_with_id not in possible_methods[module_name]:
+						method_name_with_id = method_name + '-{}'.format(id)
+						if method_name_with_id not in possible_methods[module_name]:
+							if word == keywords[0]:
 								possible_methods[module_name][method_name_with_id] = {
 									'method': method_name,
 									'nb_keywords': 1,
-									'keywords_required': len(keywords)
+									'keywords_required': len(keywords),
+									'word_cursor': 1
 								}
-							else:
-								possible_methods[module_name][method_name_with_id]['nb_keywords'] += 1
+						else:
+							possible_method = possible_methods[module_name][method_name_with_id]
+							if possible_method['word_cursor'] < possible_method['keywords_required']:
+								if word == keywords[possible_method['word_cursor']]:
+									possible_method['nb_keywords'] += 1
+									possible_method['word_cursor'] += 1
 						id += 1
-			word_id += 1
 
-		# call the correct method in all possible methods
+			# call the correct method in all possible methods
 		for module_name, methods in possible_methods.items():
 			for method_name, frequency in methods.items():
 				if frequency['nb_keywords'] == frequency['keywords_required']:
