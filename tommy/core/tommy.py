@@ -65,7 +65,7 @@ class Tommy:
 									possible_method['word_cursor'] += 1
 						id += 1
 
-			# call the correct method in all possible methods
+		# call the correct method in all possible methods
 		for module_name, methods in possible_methods.items():
 			for method_name, frequency in methods.items():
 				if frequency['nb_keywords'] == frequency['keywords_required']:
