@@ -16,6 +16,11 @@
           "good",
           "morning"
         ]
+      },
+      {
+        "keywords": [
+          "hey"
+        ]
       }
     ]
   },
@@ -37,6 +42,12 @@
           "who",
           "are",
           "you"
+        ]
+      },
+      {
+        "keywords": [
+          "introduce",
+          "yourself"
         ]
       }
     ]

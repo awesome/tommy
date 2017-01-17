@@ -15,3 +15,7 @@ LOAD_MODULES = [
 ]
 
 MODULES_FOLDER = 'modules'
+
+USER_INFOS = {
+	'username': 'Alexander'
+}

@@ -2,7 +2,7 @@
 Tommy Hello module
 Just for fun
 """
-import os
+from config.settings import USER_INFOS
 from tommy.core.module import Module
 
 
@@ -15,7 +15,7 @@ class Core(Module):
 		super(Core, self).__init__('tommy_hello')
 
 	def hello(self):
-		return self.random_translation("hello")
+		return self.random_translation("hello").format(USER_INFOS['username'])
 
 	def how_are_you(self):
 		return self.random_translation("how_are_you")
