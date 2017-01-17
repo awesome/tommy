@@ -5,7 +5,6 @@ import importlib
 from config.settings import LOAD_MODULES, MODULES_FOLDER
 from tommy.core.tprotocol import TResponse
 
-
 class Tommy:
 	"""
 	Tommy class
@@ -36,6 +35,7 @@ class Tommy:
 		for module in LOAD_MODULES:
 			possible_methods[module] = {}
 
+		word_id = 0
 		# iterate on each words
 		for word in splited_text:
 			# iterate on modules
@@ -46,19 +46,20 @@ class Tommy:
 					id = 0  # unique identifier for same methods but different calls
 					# iterate on each calls
 					for call in method_definition['calls']:
-
-						if word in call['keywords']:
+						keywords = call['keywords']
+						if word_id < len(keywords) and word == keywords[word_id]:
 							method_name_with_id = method_name + '-{}'.format(id)
 
 							if method_name_with_id not in possible_methods[module_name]:
 								possible_methods[module_name][method_name_with_id] = {
 									'method': method_name,
 									'nb_keywords': 1,
-									'keywords_required': len(call['keywords'])
+									'keywords_required': len(keywords)
 								}
 							else:
 								possible_methods[module_name][method_name_with_id]['nb_keywords'] += 1
 						id += 1
+			word_id += 1
 
 		# call the correct method in all possible methods
 		for module_name, methods in possible_methods.items():
