@@ -58,5 +58,5 @@ class TommyInterface(Frame):
 window = Tk()
 window.title("Tommy virtual assistant")
 interface = TommyInterface(window)
-
+window.attributes('-topmost', True) # note - before topmost
 interface.mainloop()
