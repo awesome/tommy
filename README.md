@@ -3,11 +3,11 @@ For the moment, tommy works only on Linux/MacOs
 
 ## Install tommy
 
-You need **python3, pip3 and git** for performing installation
+You need **python3, pip3, python3-tk and git** for performing installation
 
 For example on ubuntu : 
 
-`apt-get install python3 python3-pip git`
+`apt-get install python3 python3-pip python3-tk git`
 
 on Mac OS you can use **brew**
 
