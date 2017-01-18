@@ -9,7 +9,10 @@ Download the installer [here](https://1drv.ms/u/s!AildMZx29uVYgQhmXqt7yM4-8T4Q) 
 `sh installation_linux_macos.sh`
 
 Now just run
-`sh tommy-assistant/tommy.sh`
+`
+cd tommy-assistant/
+sh tommy.sh
+`
 
 
 
