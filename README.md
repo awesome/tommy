@@ -20,7 +20,7 @@ sh tommy.sh
 
 You can edit your username in **tommy_sources/config/settings.py**
 
-## What can I say to tommy
+## What can I say to tommy ?
 
 Look at the contents of the keywords folder of each module in **tommy_sources/modules**
 
