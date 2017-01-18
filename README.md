@@ -5,6 +5,12 @@ For the moment, tommy works only on Linux/MacOs
 
 You need **python3, pip3 and git** for performing installation
 
+For example on ubuntu : 
+
+`apt-get install python3 python3-pip git`
+
+on Mac OS you can use **brew**
+
 Download the installer [here](https://1drv.ms/u/s!AildMZx29uVYgQhmXqt7yM4-8T4Q) and run
 `sh installation_linux_macos.sh`
 
