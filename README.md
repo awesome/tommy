@@ -18,6 +18,8 @@ cd tommy-assistant/
 sh tommy.sh
 `
 
+You can edit your username in **tommy_sources/config/settings.py**
+
 
 
 
