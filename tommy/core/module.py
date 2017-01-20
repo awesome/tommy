@@ -3,7 +3,7 @@ Module package
 Standards for every tommy modules
 """
 import json, random
-from config.settings import TOOMY_ROOT, LANG
+from config.settings import TOMMY_ROOT, LANG
 
 
 class Module:
@@ -17,11 +17,11 @@ class Module:
 		:param module_name:
 		"""
 		# load keywords
-		with open(TOOMY_ROOT + '/modules/{}/keywords/keywords_{}.json'.format(module_name, LANG)) as keywords:
+		with open(TOMMY_ROOT + 'modules/{}/keywords/keywords_{}.json'.format(module_name, LANG)) as keywords:
 			self.keywords = json.load(keywords)
 
 		# load translations
-		with open(TOOMY_ROOT + '/modules/{}/translations/translations_{}.json'.format(module_name,
+		with open(TOMMY_ROOT + 'modules/{}/translations/translations_{}.json'.format(module_name,
 																					  LANG)) as translations:
 			self.translations = json.load(translations)
 

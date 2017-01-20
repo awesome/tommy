@@ -2,3 +2,4 @@ pip:
 	- importlib
 	- SpeechRecognition
 	- pyaudio
+  - Pillow
