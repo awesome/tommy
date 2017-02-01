@@ -10,7 +10,8 @@ LANG = 'en'
 # Modules settings
 
 LOAD_MODULES = [
-	'tommy_hello'
+	'tommy_hello',
+	'tommy_time'
 ]
 
 MODULES_FOLDER = 'modules'

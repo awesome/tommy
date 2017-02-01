@@ -1,0 +1,16 @@
+{
+  "what_time_is_it_in": {
+    "calls": [
+      {
+        "keywords": [
+          "what",
+          "time",
+          "is",
+          "it",
+          "in",
+          "%s"
+        ]
+      }
+    ]
+  }
+}

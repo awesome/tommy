@@ -59,7 +59,8 @@ class Tommy:
 						else:
 							possible_method = possible_methods[module_name][method_name_with_id]
 							if possible_method['word_cursor'] < possible_method['keywords_required']:
-								if word == keywords[possible_method['word_cursor']]:
+								if word == keywords[possible_method['word_cursor']] or keywords[
+									possible_method['word_cursor']] == '%s':
 									possible_method['nb_keywords'] += 1
 									possible_method['word_cursor'] += 1
 						id += 1
@@ -70,7 +71,7 @@ class Tommy:
 				if frequency['nb_keywords'] == frequency['keywords_required']:
 					method_to_call = frequency['method'].split('-')[0]  # remove id
 					used_module = self.modules[module_name]
-					tresponse = getattr(used_module, method_to_call)()
+					tresponse = getattr(used_module, method_to_call)(splited_text)
 					tresponse.trequest = trequest
 					return tresponse
 

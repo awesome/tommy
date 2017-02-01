@@ -15,12 +15,12 @@ class Core(Module):
 	def __init__(self):
 		super(Core, self).__init__('tommy_hello')
 
-	def hello(self):
+	def hello(self, splited_text):
 		return TResponse(self.random_translation("hello").format(USER_INFOS['username']))
 
-	def how_are_you(self):
+	def how_are_you(self, splited_text):
 		return TResponse(self.random_translation("how_are_you"))
 
-	def who_are_you(self):
+	def who_are_you(self, splited_text):
 		return TResponse(self.random_translation("who_are_you"))
 
