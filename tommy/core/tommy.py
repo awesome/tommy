@@ -4,7 +4,6 @@ Tommy virtual assistant core module
 import importlib
 from config.settings import LOAD_MODULES, MODULES_FOLDER
 from tommy.core.tprotocol import TResponse
-import pdb
 
 
 class Tommy:
@@ -71,7 +70,8 @@ class Tommy:
 				if frequency['nb_keywords'] == frequency['keywords_required']:
 					method_to_call = frequency['method'].split('-')[0]  # remove id
 					used_module = self.modules[module_name]
-					response_text = getattr(used_module, method_to_call)()
-					return TResponse(response_text, trequest)
+					tresponse = getattr(used_module, method_to_call)()
+					tresponse.trequest = trequest
+					return tresponse
 
 		return TResponse("Sorry I don't understand", trequest)

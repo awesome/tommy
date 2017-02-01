@@ -63,7 +63,7 @@ class TResponse(TPackage):
 	Tommy only sends TResponse
 	"""
 
-	def __init__(self, plain_text, trequest):
+	def __init__(self, plain_text, trequest=None):
 		"""
 		TResponse constructor
 		Initializes the various information
@@ -74,9 +74,10 @@ class TResponse(TPackage):
 		"""
 		super(TResponse, self).__init__(plain_text)
 		self.trequest = trequest
+		self.text_to_say = plain_text
 
-		if not self.trequest:
-			raise TResponseWithoutRequest(self)
+		#if not self.trequest:
+		#	raise TResponseWithoutRequest(self)
 
 
 # Exceptions

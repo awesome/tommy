@@ -4,6 +4,7 @@ Just for fun
 """
 from config.settings import USER_INFOS
 from tommy.core.module import Module
+from tommy.core.tprotocol import TResponse
 
 
 class Core(Module):
@@ -15,11 +16,11 @@ class Core(Module):
 		super(Core, self).__init__('tommy_hello')
 
 	def hello(self):
-		return self.random_translation("hello").format(USER_INFOS['username'])
+		return TResponse(self.random_translation("hello").format(USER_INFOS['username']))
 
 	def how_are_you(self):
-		return self.random_translation("how_are_you")
+		return TResponse(self.random_translation("how_are_you"))
 
 	def who_are_you(self):
-		return self.random_translation("who_are_you")
+		return TResponse(self.random_translation("who_are_you"))
 
