@@ -24,3 +24,6 @@ class Core(Module):
 	def who_are_you(self, splited_text):
 		return TResponse(self.random_translation("who_are_you"))
 
+	def mona(self, splited_text):
+		return TResponse(self.random_translation("mona"))
+
