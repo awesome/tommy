@@ -1,10 +1,9 @@
 """
 Tommy virtual assistant core module
 """
-import importlib
+import importlib, hashlib
 from config.settings import LOAD_MODULES, MODULES_FOLDER
 from tommy.core.tprotocol import TResponse
-import pdb
 
 
 class Tommy:
@@ -75,3 +74,29 @@ class Tommy:
 					return TResponse(response_text, trequest)
 
 		return TResponse("Sorry I don't understand", trequest)
+
+
+class Node:
+	"""
+	A node of the Tommy keywords tree
+	"""
+	def __init__(self, word, *branches):
+		"""
+		Hash the word to an uniq fingerprint
+		:param word: The word represented by the node
+		:param branches: Next branches of the node (childs)
+		"""
+		self.word = word
+		self.fingerprint = hashlib.sha1(str.encode(self.word)).hexdigest()
+
+		branches = list(branches)
+		self.branches = []
+		for branch in branches:
+			self.branches.append(Node(branch))
+
+	def has_branches(self):
+		"""
+		Check if node has child
+		:return:
+		"""
+		return self.branches and len(self.branches) > 0
