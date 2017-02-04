@@ -80,23 +80,34 @@ class Node:
 	"""
 	A node of the Tommy keywords tree
 	"""
-	def __init__(self, word, *branches):
+	def __init__(self, word, *childs, is_variable=False):
 		"""
-		Hash the word to an uniq fingerprint
+		Create a node, set the word associated and the child nodes
 		:param word: The word represented by the node
-		:param branches: Next branches of the node (childs)
+		:param childs: Child nodes (list of another nodes)
 		"""
 		self.word = word
-		self.fingerprint = hashlib.sha1(str.encode(self.word)).hexdigest()
+		if word:
+			self.fingerprint = hashlib.sha1(str.encode(self.word)).hexdigest()
+		self.childs = list(childs)
+		self.is_variable = is_variable
 
-		branches = list(branches)
-		self.branches = []
-		for branch in branches:
-			self.branches.append(Node(branch))
+	def has_childs(self):
+		"True if current node has childs"
+		return len(self.childs) > 0
 
-	def has_branches(self):
-		"""
-		Check if node has child
-		:return:
-		"""
-		return self.branches and len(self.branches) > 0
+	def get_child(self, word):
+		"""Get a node's child using a word"""
+		for child in self.childs:
+			if child.word == word: return child
+		return None
+
+
+class Root(Node):
+	"""Root of the tommy's tree"""
+	def __init__(self, *childs):
+		"""Instancie a root node without word associated"""
+		super(Root, self).__init__(None, *childs)
+
+
+
