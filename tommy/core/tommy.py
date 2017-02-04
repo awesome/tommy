@@ -1,8 +1,8 @@
 """
 Tommy virtual assistant core module
 """
-import importlib, hashlib, json
-from config.settings import LOAD_MODULES, MODULES_FOLDER, TOMMY_ROOT, LANG
+import hashlib, json
+from config.settings import LOAD_MODULES, TOMMY_ROOT, LANG
 from tommy.core.tprotocol import TResponse
 
 
