@@ -41,51 +41,23 @@ class Tommy:
 		:param trequest: TRequest sended by user
 		:type trequest: TRequest
 		"""
-		splited_text = trequest.splited_text
+		keywords = trequest.splited_text
+		current_node = self.tree
+		for keyword in keywords:
+			if current_node.has_child(keyword):
+				current_node = current_node.get_child(keyword)
+			else:
+				break
 
-		possible_methods = {}
+		if current_node.is_callable():
+			module = __import__('modules.{}.core'.format(current_node.module), fromlist=[None])  # I don't understant that fromlist
+			method = getattr(module.Core(), current_node.method)
+			return TResponse(method(), trequest)
+		else:
+			return TResponse("Sorry I don't understand", trequest)
 
-		for module in LOAD_MODULES:
-			possible_methods[module] = {}
 
-		# iterate on each words
-		for word in splited_text:
-			# iterate on modules
-			for module_name, module_instance in self.modules.items():
-				# iterate on each methods
-				for method_name, method_definition in module_instance.keywords.items():
-					# iterate on calls
-					id = 0  # unique identifier for same methods but different calls
-					# iterate on each calls
-					for call in method_definition['calls']:
-						keywords = call['keywords']
-						method_name_with_id = method_name + '-{}'.format(id)
-						if method_name_with_id not in possible_methods[module_name]:
-							if word == keywords[0]:
-								possible_methods[module_name][method_name_with_id] = {
-									'method': method_name,
-									'nb_keywords': 1,
-									'keywords_required': len(keywords),
-									'word_cursor': 1
-								}
-						else:
-							possible_method = possible_methods[module_name][method_name_with_id]
-							if possible_method['word_cursor'] < possible_method['keywords_required']:
-								if word == keywords[possible_method['word_cursor']]:
-									possible_method['nb_keywords'] += 1
-									possible_method['word_cursor'] += 1
-						id += 1
 
-		# call the correct method in all possible methods
-		for module_name, methods in possible_methods.items():
-			for method_name, frequency in methods.items():
-				if frequency['nb_keywords'] == frequency['keywords_required']:
-					method_to_call = frequency['method'].split('-')[0]  # remove id
-					used_module = self.modules[module_name]
-					response_text = getattr(used_module, method_to_call)()
-					return TResponse(response_text, trequest)
-
-		return TResponse("Sorry I don't understand", trequest)
 
 
 class Node:
