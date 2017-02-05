@@ -9,7 +9,17 @@ setup(
   author_email='alexandre.markiewicz.1997@gmail.com, callme@1800AWESO.ME',
   license='MIT',
   packages=['tommy'],
+  install_requires=[
+    'python-dotenv',
+  ],
   zip_safe=False,
   test_suite='nose.collector',
   tests_require=['nose']
 )
+
+## https://github.com/theskumar/python-dotenv/issues/6#issuecomment-177905010
+#import os
+#from os.path import join, dirname
+#from dotenv import Dotenv
+#dotenv = Dotenv(os.path.join(os.path.dirname(__file__), ".env")) # Of course, replace by your correct path
+#os.environ.update(dotenv)
